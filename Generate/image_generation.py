@@ -29,6 +29,7 @@ def get_images():
 
 @IGBP.route("/generate_desgin", methods=["GET", "POST"])
 def generate_design():
+    image = None
     if request.method == "POST":
         image = get_images()  # Fetch images when button is clicked
     return render_template("image_generation.html", image=image)
