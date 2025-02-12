@@ -1,0 +1,25 @@
+for now the point of this app is to help artists make awesome character desgins
+
+Adam version 1.0
+
+- The first step being the user will upload images of their fav types into 3 categories 
+    *character desgins  = done
+    *character poses  = done
+    *character expressions = done
+
+- Then the user will select the features they want to include in their character design
+    *then the user will tap the genrate button and get a random pic from each 3 types
+
+- The user will then be able to see a generated character design based on their selections
+    *if i feel annoyed this feature will be off the table but the user will be able to save the character desgin 
+
+
+
+
+
+
+
+
+
+- The user will be able to save and share their generated character design
+- The user will be able to view all of their previous character designs

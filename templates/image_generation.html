@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Character Design</title>
+</head>
+
+<body>
+    <form action="/generate_desgin" method="POST">
+        <button type="submit" name="button" value="Pressed">Generate Random Image</button>
+    </form>
+
+    {% if image %}
+    <h3>Random Character Design:</h3>
+    <img src="{{ image }}" alt="Generated Character Design" style="max-width: 500px;">
+    {% else %}
+    <p>No image generated yet.</p>
+    {% endif %}
+</body>
+
+</html>
