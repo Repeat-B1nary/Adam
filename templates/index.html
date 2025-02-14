@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
     {% include 'nav.html' %}
 
-    <form action="/" method="POST" enctype="multipart/form-data">
-        <label for="description">What type of Image is this</label>
-        <select name="type" id="type">
-            <option value="none">None</option>
-            <option value="Character_Desgin">Character_Desgin</option>
-            <option value="Character_Pose">Character_Pose</option>
-            <option value="Character_Expression">Character_Expression</option>
-        </select>
 
-        <input type="file" name="image" id="image">
-        <button type="submit">Submit</button>
-    </form>
+    <div id="body">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="description" class="image-type">What type of Image is this </label>
+            <select name="type" id="type">
+                <option value="none">None</option>
+                <option value="Character_Desgin">Character_Desgin</option>
+                <option value="Character_Pose">Character_Pose</option>
+                <option value="Character_Expression">Character_Expression</option>
+            </select>
+        
+            <input type="file" name="image" id="image">
+        
+            <button type="submit">Submit</button>
+        </form>
 
+    </div>
+    <footer>
+        <p>Made for Artists by Artists ✨</p>
+    </footer>
+    
 </body>
 </html>

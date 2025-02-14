@@ -8,14 +8,14 @@ Adam version 1.0
     *character expressions = done
 
 - Then the user will select the features they want to include in their character design
-    *then the user will tap the genrate button and get a random pic from each 3 types
+    *then the user will tap the genrate button and get a random pic from each 3 types = done
 
 - The user will then be able to see a generated character design based on their selections
     *if i feel annoyed this feature will be off the table but the user will be able to save the character desgin 
 
 
 
-
+step 2: Do the frontend boi, don't be lazy
 
 
 

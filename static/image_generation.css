@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+    background: rgb(13, 0, 0);
+    font-family: 'OCR A Std', monospace;
+    color: rgb(181, 222, 243);
+    text-align: center;
+    padding-top: 60px;
+    /* Prevents navbar overlap */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Makes everything centered */
+}
+
+/* Main Container */
+#form {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    height: 70vh;
+    background: rgba(19, 18, 18, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 100, 100, 0.2);
+    overflow: hidden;
+}
+
+/* Left Side: Image Container */
+.image-container {
+    width: 50%;
+    overflow-y: auto;
+    padding: 15px;
+    border-right: 2px solid rgba(200, 50, 50, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(200, 50, 50) transparent;
+}
+
+/* Scrollbar Customization (For Webkit Browsers) */
+.image-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.image-container::-webkit-scrollbar-thumb {
+    background: rgb(200, 50, 50);
+    border-radius: 10px;
+}
+
+/* Stack Images in an Elegant Way */
+.image-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.image-stack img {
+    max-width: 90%;
+    border-radius: 10px;
+    border: 2px solid rgb(90, 30, 30);
+    box-shadow: 0px 4px 10px rgba(255, 100, 100, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Make Images Pop on Hover */
+.image-stack img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 20px rgba(255, 100, 100, 0.5);
+}
+
+/* Right Side: Form */
+form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Checkbox Container */
+form div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="checkbox"] {
+    accent-color: rgb(200, 50, 50);
+    transform: scale(1.2);
+    margin: 5px;
+}
+
+/* Button */
+button {
+    background: rgb(150, 30, 30);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background: rgb(200, 50, 50);
+    box-shadow: 0 0 10px rgba(255, 100, 100, 0.7);
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgb(19, 18, 18);
+    padding: 10px;
+    color: beige;
+    font-size: 0.9rem;
+    text-shadow: 0px 0px 5px rgba(255, 100, 100, 0.5);
+}

@@ -5,29 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Character Design</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='image_generation.css') }}">
 </head>
 
 <body>
-    <form action="/generate_desgin" method="POST">
-        <label for="name"></label>
-        <div>
-            <label for="name">Character Desgin</label>
-            <input type="radio" value="Character Design">
-            <label for="name">Character Pose</label>
-            <input type="radio" value="Character Pose">
-            <label for="name">Character Expression</label>
-            <input type="radio" value="Character Expression">
+    {% include 'nav.html' %}
+
+    {% block content %}
+    <div id="form">
+        <form action="/generate_desgin" method="POST">
+            <label for="name"></label>
+            <div>
+                <label for="selection">Character Desgin</label>
+                <input type="checkbox" value="Character Design" name="selection">
+                <label for="selection">Character Pose</label>
+                <input type="checkbox" value="Character Pose" name="selection">
+                <label for="selection">Character Expression</label>
+                <input type="checkbox" value="Character Expression" name="selection">
+            </div>
+
+            <button type="submit" name="button" value="Pressed">Generate Random Image</button>
+        </form>
+
+        <div class="image-container">
+            {% if images %}
+            <h3>Random Character Design:</h3>
+            <div class="image-stack">
+                {% for image in images %}
+                <img id="image" src="{{ image }}" alt="Generated Character Design"
+                    style="max-width: 500px; display: block; margin: 10px 0;">
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>image folder is empty.</p>
+            {% endif %}
+
+
+
         </div>
+    </div>
+    <footer>
+        <p>Made for Artists by Artists ✨</p>
+    </footer>
 
-        <button type="submit" name="button" value="Pressed">Generate Random Image</button>
-    </form>
+    {% endblock %}
 
-    {% if image %}
-    <h3>Random Character Design:</h3>
-    <img src="{{ image }}" alt="Generated Character Design" style="max-width: 500px;">
-    {% else %}
-    <p>No image generated yet.</p>
-    {% endif %}
 </body>
 
 </html>

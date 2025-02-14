@@ -11,13 +11,13 @@ CHARACTER_DESIGN_DIR = os.path.join(os.getcwd(), "Character_Desgin")
 CHARACTER_POSES_DIR = os.path.join(os.getcwd(), "Character_pose")
 CHARACTER_EXPRESSION_DIR = os.path.join(os.getcwd(), "Character_Expression")
 
-def get_images():
+def get_images(Dir):
     """Reads images from the folder and encodes them in base64 for direct embedding."""
     images = []
-    if os.path.exists(CHARACTER_DESIGN_DIR):
-        for filename in os.listdir(CHARACTER_DESIGN_DIR):
+    if os.path.exists(Dir):
+        for filename in os.listdir(Dir):
             if filename.lower().endswith(('png', 'jpg', 'jpeg', 'gif')):
-                filepath = os.path.join(CHARACTER_DESIGN_DIR, filename)
+                filepath = os.path.join(Dir, filename)
                 with open(filepath, "rb") as image_file:
                     encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
                     images.append(f"data:image/{filename.split('.')[-1]};base64,{encoded_image}")
@@ -29,10 +29,33 @@ def get_images():
 
 @IGBP.route("/generate_desgin", methods=["GET", "POST"])
 def generate_design():
-    image = None
+    images = []
     if request.method == "POST":
-        image = get_images()  # Fetch images when button is clicked
-    return render_template("image_generation.html", image=image)
+        selection = request.form.getlist("selection")
+        print("selection: ",selection)
+
+        for selection in selection:
+            print("selection: ",selection)
+            if selection == "Character Design":
+                image = get_images(CHARACTER_DESIGN_DIR)  # Fetch images when button i
+                if image:
+                    images.append(image)
+                else:
+                    None
+            elif selection == "Character Pose":
+                image = get_images(CHARACTER_POSES_DIR)
+                if image:
+                    images.append(image)
+                else:
+                    None
+            elif selection == "Character Expression":
+                image = get_images(CHARACTER_EXPRESSION_DIR)
+                if image:
+                    images.append(image)
+                else:
+                    None
+
+    return render_template("image_generation.html", images=images)
 
 if __name__ == "__main__":
     app.run(debug=True)

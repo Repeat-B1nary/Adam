@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.register_blueprint(IGBP)
 
 
+
 Character_Desgin = 'Character_Desgin'
 Character_Pose = "Character_Pose"
 Character_Expression = "Character_Expression"
