@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+</head>
+
+<body>
+    {% include 'nav.html' %}
+
+    <div class="profile-card">
+        <div class="passport-header">User Passport</div>
+
+        <div style="display: flex; align-items: center; padding: 15px;">
+            <img src="{{ url_for('static', filename=profile_pic) if profile_pic else url_for('static', filename='default_profile.jpg') }}"
+                alt="Profile Picture" class="profile-img">
+
+
+            <div class="profile-info">
+                <div class="info-box">
+                    <h2>Username:</h2>
+                    <h2>{{ username }}</h2>
+                </div>
+                <div class="info-box">
+                    <h2>Password:</h2>
+                    <h2>{{ password }}</h2>
+                </div>
+                <div class="info-box">
+                    <h2>Email:</h2>
+                    <h2>{{ email }}</h2>
+                </div>
+                <div class="info-box">
+                    <h2>Gender:</h2>
+                    <h2>{{ gender }}</h2>
+                </div>
+                <div class="info-box">
+                    <h2>Date of Birth:</h2>
+                    <h2>{{ dob }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="signature">Authorized Signature</div>
+    </div>
+
+</body>
+
+</html>

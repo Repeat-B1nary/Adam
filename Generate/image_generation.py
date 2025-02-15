@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Blueprint
+from flask import Flask, render_template, request, Blueprint, url_for, session, redirect
 import os
 import base64
 import random
@@ -29,6 +29,9 @@ def get_images(Dir):
 
 @IGBP.route("/generate_desgin", methods=["GET", "POST"])
 def generate_design():
+    if 'user_id' not in session:
+        return redirect(url_for('login.login'))
+    
     images = []
     if request.method == "POST":
         selection = request.form.getlist("selection")

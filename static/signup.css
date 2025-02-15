@@ -1,0 +1,182 @@
+/* Global Styles */
+* {
+    color: rgb(189, 3, 3);
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(21, 7, 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Ensures content never overflows */
+    margin: 0;
+    padding: 20px;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    max-width: 500px;
+    max-height: 90vh;
+    /* Prevents it from exceeding viewport height */
+    overflow-y: auto;
+    /* Allows scrolling if content is too large */
+    padding: 25px;
+    border: 2px solid rgb(121, 2, 2);
+    border-radius: 12px;
+    background: rgba(33, 10, 10, 0.8);
+    box-shadow: 0px 0px 15px rgba(189, 3, 3, 0.6);
+    transition: 0.3s ease-in-out;
+}
+
+
+/* Fieldset hover effect */
+fieldset:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 20px rgba(189, 3, 3, 0.8);
+}
+
+/* Legend (Title) Styling */
+legend {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgb(21, 7, 7);
+    box-shadow: 0px 0px 8px rgba(189, 3, 3, 0.6);
+    text-transform: uppercase;
+}
+
+/* Input and Select Fields */
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid rgb(121, 2, 2);
+    border-radius: 8px;
+    background: rgb(30, 10, 10);
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Input Focus Effect */
+input:focus,
+select:focus {
+    border-color: rgb(189, 3, 3);
+    box-shadow: 0px 0px 10px rgba(189, 3, 3, 0.7);
+    transform: scale(1.02);
+}
+
+/* Align Labels Properly */
+#item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#item label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    fieldset {
+        width: 90%;
+        padding: 15px;
+    }
+
+    legend {
+        font-size: 1.5rem;
+    }
+
+    input,
+    select {
+        width: 100%;
+    }
+}
+
+/* Submit Button */
+button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(135deg, #9d023b, #82011d);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Select Styling */
+select {
+    font-size: 15px;
+    border: 2px solid #6a11cb;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Select Focus */
+select:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+}
+
+/* Select Options */
+select option {
+    padding: 10px;
+    background: white;
+    color: #333;
+}
+
+/* File Input Styling */
+input[type="file"] {
+    display: none;
+}
+
+/* Custom File Input Button */
+.file-upload {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+.file-upload:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+/* Ensures alignment of file upload */
+.file-input-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
