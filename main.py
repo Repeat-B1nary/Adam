@@ -54,9 +54,13 @@ def profile():
 
     return render_template('profile.html', username=username, password=password, email=email, gender=gender, dob=dob, profile_pic=profile_pic)
 
+@app.route("/")
+def home():
+
+    return render_template("home.html")
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/upload", methods=["POST", "GET"])
 def index():
     if "user_id" not in session:
         return redirect(url_for("login.login"))  # Redirect to login if not authenticated
@@ -77,9 +81,9 @@ def index():
             image_path = os.path.join(user_folder, image.filename)
             image.save(image_path)
 
-            return render_template("index.html", image_path=image_path)
+            return render_template("upload.html", image_path=image_path)
 
-    return render_template("index.html", image_path=None)
+    return render_template("upload.html", image_path=None)
 
 
 @app.route('/logout')
