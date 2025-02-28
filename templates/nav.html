@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Responsive Navbar</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    <script defer src="{{ url_for('static', filename='nav.js') }}"></script>
 </head>
+
 <body>
     <nav>
-        <ul>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul id="nav-links">
             <li><a href="/">Home</a></li>
+            <li><a href="/upload">Upload</a></li>
+            <li><a href="/generate_desgin">Generate Images</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
-       <ul><li><a href="/upload"> Upload</a></li></ul>
-       <ul><li><a href="/generate_desgin">Generate Images</a></li></ul>
-       <ul><li><a href="/profile">Profile</a></li></ul>
-       <ul><li><a href="/logout">Logout</a></li></ul>
-       <ul><li><a href="/profile">Profile</a></li></ul>
-       
     </nav>
 </body>
+
 </html>

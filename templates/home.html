@@ -1,13 +1,148 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home | Line Bender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
+
 <body>
     {% include 'nav.html' %}
+
+
+
+    <!-- Background Circle -->
+    <div id="circle"></div>
+
+    <!-- Welcome Section -->
+    <section class="section" id="welcome-section">
+        <h1 id="Welcome">Welcome, Fellow Line Bender</h1>
+        <p>Upload, generate references, and fuel your artistic journey.</p>
+    </section>
+
+    <div>
+        <h1>What is Adam Ligmaballs?</h1>
+        <p>Adam Ligmaballs is a creative playground designed for artists struggling with art block. Whether you're a
+            digital
+            painter, traditional artist, or just looking for new ideas, we provide tools to spark creativity.</p>
+        <h2>morale of the story</h2>
+        <h3>whenever you have ligma, come here</h3>
+    </div>
+
+    <!-- Description Section -->
+    <section class="section" id="description-section">
+        <h1>Explore Your Creativity</h1>
+        <p>Upload your artwork, generate references, and enhance your artistic journey.</p>
+    </section>
+
+    <!-- Site Instructions -->
+    <section class="section" id="site_instruction_1">
+        <h1>Three Key Features</h1>
+
+        <div id="site_instruction">
+            <div id="upload_description">
+                <a href="/upload">🎨 Upload & Organize</a>
+                <p>Upload an image from your device into a folder of your choice.</p>
+            </div>
+
+            <div id="image_generation_description">
+                <a href="/generate_desgin">🔄 Generate Random Prompts & References</a>
+                <p>Stuck? Get a random image from your collection or our curated database to jumpstart your creativity.
+                </p>
+
+            </div>
+
+            <div>
+                <h2>💡 Discover & Learn</h2>
+                <p>Engage with unique tools, artistic challenges, and inspirational resources to keep improving.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison">
+        <h1>Why Choose Us?</h1>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Our Platform</th>
+                <th>Other Art Sites</th>
+            </tr>
+            <tr>
+                <td>Instant Art References</td>
+                <td>✅ Yes</td>
+                <td>❌ No</td>
+            </tr>
+            <tr>
+                <td>Smart Organization</td>
+                <td>✅ Yes</td>
+                <td>❌ No</td>
+            </tr>
+            <tr>
+                <td>Designed for Artists</td>
+                <td>✅ 100%</td>
+                <td>⚠️ Partially</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <section class="section" id="how-it-works">
+        <h1>How It Works</h1>
+        <div class="steps">
+            <div class="step">
+                <a href="/upload">Upload </a>
+                <p>Choose an image from your device and upload it into your personal folder.</p>
+            </div>
+            <div class="step">
+                <a href="/generate_desgin">Generate</a>
+                <p>Click 'Generate' to get a random reference image when you're stuck.</p>
+            </div>
+            <div class="step">
+                <h2>3. Create</h2>
+                <p>Use the reference, get inspired, and start drawing!</p>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <h3>Quick Links: </h3> <a href="upload_images">Upload | </a> <a href="generate_images"> Generate | </a>
+    </footer>
+    <script>
+        document.addEventListener("scroll", function () {
+                const sections = document.querySelectorAll(".section");
+                const features = document.querySelectorAll("#site_instruction div");
+
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 500 && rect.bottom > 0) {
+                        section.classList.add("show");
+                    } else {
+                        section.classList.remove("show");
+                    }
+                });
+
+                features.forEach((feature, index) => {
+                    const rect = feature.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 200 && rect.bottom > 0) {
+                        feature.style.opacity = "1";
+                        feature.style.transform = `translateX(${index % 2 === 0 ? "0px" : "0px"})`;
+                        feature.style.transition = `opacity 0.8s ease-out, transform 0.8s ease-out ${index * 0.2}s`;
+                    } else {
+                        feature.style.opacity = "0";
+                        feature.style.transform = `translateX(-50px)`;
+                    }
+                });
+            });
+
+    </script>
+
+    </body>
+    <!--hjfjgj-->
     
-    <h1>home page</h1>
-</body>
+    
+    
 </html>

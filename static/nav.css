@@ -1,31 +1,30 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Navigation Bar */
 nav {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
-    /* Keeps it at the top */
     top: 0;
     left: 0;
     width: 100%;
     background: rgba(19, 18, 18, 0.95);
-    /* Dark background with slight transparency */
-    padding: 12px 0;
-    text-align: center;
+    padding: 12px 20px;
     border-bottom: 2px solid rgb(90, 30, 30);
-    /* Deep red accent */
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
-    /* Ensures it stays above other elements */
 }
 
-/* Navigation Links */
+/* Navigation Links (Desktop) */
 nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
-    justify-content: center;
     gap: 20px;
 }
 
@@ -48,8 +47,48 @@ nav a:hover {
     text-shadow: 0 0 8px rgba(255, 100, 100, 0.6);
 }
 
-/* Prevents content from being hidden under the navbar */
-body {
-    padding-top: 60px;
-    /* Adjust this based on nav height */
+/* Hamburger Menu for Small Screens */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle div {
+    width: 30px;
+    height: 3px;
+    background: rgb(200, 100, 100);
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Mobile Dropdown */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(19, 18, 18, 0.95);
+        padding: 10px 0;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
 }
