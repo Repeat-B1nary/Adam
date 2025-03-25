@@ -12,45 +12,44 @@
     {% include 'nav.html' %}
 
     {% block content %}
+    
     <div id="form">
-        <form action="/generate_desgin" method="POST">
-            <label for="name"></label>
-            <div>
-                <label for="selection">Character Desgin</label>
-                <input type="checkbox" value="Character Design" name="selection">
-                <label for="selection">Character Pose</label>
-                <input type="checkbox" value="Character Pose" name="selection">
-                <label for="selection">Character Expression</label>
-                <input type="checkbox" value="Character Expression" name="selection">
+        <form action="/generate_design" method="POST">
+            <p>Select a folder:</p>
+            <div id="folders">
+                {% if users_folder %}
+                {% for folders in folders %}
+                <input type="checkbox" id="{{ folders }}" name="folder_name" value="{{ folders }}">
+                <label for="{{ folders }}">{{ folders }}</label>
+                {% endfor %}
+                {% else %}
+                <p>No folders available.</p>
+                {% endif %}
             </div>
 
             <button type="submit" name="button" value="Pressed">Generate Random Image</button>
         </form>
 
         <div class="image-container">
-            {% if images %}
-            <h3>Random Character Design:</h3>
+            {% if images_pulled %}
             <div class="image-stack">
-                {% for image in images %}
-                <img id="image" src="{{ image }}" alt="Generated Character Design"
+                {% for image in images_pulled %}
+                <img src="{{ image }}" alt="Generated Character Design"
                     style="max-width: 500px; display: block; margin: 10px 0;">
                 {% endfor %}
             </div>
             {% else %}
-            <p>image folder is empty.</p>
+            <p>No images found.</p>
             {% endif %}
-
-
-
         </div>
+
+
     </div>
     <footer>
         <p>Made for Artists by Artists ✨</p>
     </footer>
 
     {% endblock %}
-
 </body>
-
 
 </html>

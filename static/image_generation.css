@@ -41,6 +41,12 @@ form {
     width: 100%;
 }
 
+#folders {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 /* Labels */
 label {
     font-size: 1rem;

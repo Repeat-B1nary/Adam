@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, Blueprint, url_for, session, redirect
+from pathlib import Path
 import os
 import base64
 import random
@@ -22,39 +23,39 @@ def get_images(directory):
     
     return random.choice(images) if images else None
 
-@IGBP.route("/generate_desgin", methods=["GET", "POST"])
+@IGBP.route("/generate_design", methods=["GET", "POST"])
 def generate_design():
     if 'user_id' not in session:
         return redirect(url_for('login.login'))
     
-    user_id = session['user_id']  # Retrieve user_id from session
-    user_folder = os.path.join(USER_UPLOADS_DIR, str(user_id))  # Path to user's folder
+    user_id = session['user_id']
+    folders = []
+    images_pulled = []
+    image = None  
 
-    # Define user-specific paths
-    character_design_dir = os.path.join(user_folder, "Character_Desgin")
-    character_poses_dir = os.path.join(user_folder, "Character_pose")
-    character_expression_dir = os.path.join(user_folder, "Character_Expression")
+    current_file_path = Path(__file__)
+    parent_directory = current_file_path.parents[1]
+    users_folder = os.path.join(parent_directory, 'User_Uploads', user_id)
 
-    images = []
-    
+    if os.path.exists(users_folder):
+        users_created_folder = os.listdir(users_folder)
+        folders.extend(users_created_folder)
+
     if request.method == "POST":
-        selection = request.form.getlist("selection")
-        print("Selection: ", selection)
+        folder_name = request.form.getlist("folder_name")  
+        print("folder name: "+ str(folder_name))  
 
-        for item in selection:
-            if item == "Character Design":
-                image = get_images(character_design_dir)
-            elif item == "Character Pose":
-                image = get_images(character_poses_dir)
-            elif item == "Character Expression":
-                image = get_images(character_expression_dir)
-            else:
-                image = None
+        for folder_names in folder_name:
+            folder_path = os.path.join(parent_directory, 'User_Uploads', user_id, folder_names)
+            image = get_images(folder_path)
+            if image:  
+                images_pulled.append(image)
+            
+            
 
-            if image:
-                images.append(image)
 
-    return render_template("image_generation.html", images=images)
+    return render_template("image_generation.html", users_folder=users_folder, folders=folders, images_pulled=images_pulled)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

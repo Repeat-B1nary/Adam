@@ -67,11 +67,12 @@ def index():
 
 
     if request.method == "POST":
-        type = request.form.get("type")
+        folder_name = request.form.get("folder_name")
         image = request.files.get("image")
 
+        print("type:  "+ folder_name)
         user_id = session["user_id"]  # Get logged-in user's ID
-        user_folder = os.path.join(app.config['UPLOAD_FOLDER'], user_id, type)  # Unique folder for user
+        user_folder = os.path.join(app.config['UPLOAD_FOLDER'], user_id, folder_name)  # Unique folder for user
 
         if not os.path.exists(user_folder):
             os.makedirs(user_folder)  # Create user-specific folder if it doesn't exist
@@ -90,6 +91,14 @@ def index():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login.login'))
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+@app.route('/about/Privacy_Policy')
+def Privacy_Policy():
+    return render_template("Privacy_Policy.html")
 
 
 if __name__ == "__main__":

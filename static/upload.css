@@ -54,10 +54,10 @@ button {
     max-width: 100%;
 }
 
-select {
-    background: #333;
-    color: #e0e0e0;
-    cursor: pointer;
+
+#folder_name {
+    display: flex;
+    justify-content: column;
 }
 
 input[type="file"] {
@@ -153,3 +153,4 @@ footer {
         padding: 6px;
     }
 }
+

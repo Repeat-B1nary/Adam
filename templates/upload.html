@@ -12,14 +12,16 @@
 
     <div id="body">
         <form action="/upload" method="POST" enctype="multipart/form-data">
-            <label for="description" class="image-type">What type of Image is this </label>
-            <select name="type" id="type">
-                <option value="none">None</option>
-                <option value="Character_Desgin">Character_Desgin</option>
-                <option value="Character_Pose">Character_Pose</option>
-                <option value="Character_Expression">Character_Expression</option>
-            </select>
-        
+            
+
+            <div id="folder_name">
+                <label for="folder_name_input">Folder Name</label>
+                <input type="text" name="folder_name" id="folder_name_input">
+            </div>
+
+
+    
+            <label for="name">Pick your image</label>
             <input type="file" name="image" id="image">
         
             <button type="submit">Submit</button>
@@ -29,6 +31,7 @@
     <footer>
         <p>Made for Artists by Artists ✨</p>
     </footer>
+
     
 </body>
 </html>

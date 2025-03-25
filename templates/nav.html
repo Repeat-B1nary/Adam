@@ -17,11 +17,18 @@
             <div></div>
         </div>
         <ul id="nav-links">
+            {% if 'user_id' not in session %}
             <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+
             <li><a href="/upload">Upload</a></li>
-            <li><a href="/generate_desgin">Generate Images</a></li>
+            <li><a href="/generate_design">Generate Images</a></li>
             <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
+
+            {% if 'user_id' in session %}
+            <li id="logout"><a href="/logout">Logout</a></li>
+            {% endif %}
         </ul>
     </nav>
 </body>
