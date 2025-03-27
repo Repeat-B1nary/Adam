@@ -12,15 +12,15 @@
     {% include 'nav.html' %}
 
     {% block content %}
-    
+
     <div id="form">
         <form action="/generate_design" method="POST">
             <p>Select a folder:</p>
             <div id="folders">
-                {% if users_folder %}
-                {% for folders in folders %}
-                <input type="checkbox" id="{{ folders }}" name="folder_name" value="{{ folders }}">
-                <label for="{{ folders }}">{{ folders }}</label>
+                {% if folders %}
+                {% for folder in folders %}
+                <input type="checkbox" id="{{ folder }}" name="folder_name" value="{{ folder }}">
+                <label for="{{ folder }}">{{ folder }}</label>
                 {% endfor %}
                 {% else %}
                 <p>No folders available.</p>
@@ -33,8 +33,8 @@
         <div class="image-container">
             {% if images_pulled %}
             <div class="image-stack">
-                {% for image in images_pulled %}
-                <img src="{{ image }}" alt="Generated Character Design"
+                {% for img in images_pulled %}
+                <img src="{{ img }}" alt="Generated Character Design"
                     style="max-width: 500px; display: block; margin: 10px 0;">
                 {% endfor %}
             </div>
@@ -42,9 +42,8 @@
             <p>No images found.</p>
             {% endif %}
         </div>
-
-
     </div>
+
     <footer>
         <p>Made for Artists by Artists ✨</p>
     </footer>

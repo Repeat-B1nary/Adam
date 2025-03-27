@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Blueprint, url_for, session, redirect
+from flask import Flask, render_template, request, Blueprint, url_for, session, redirect, flash
 from pathlib import Path
 import os
 import base64
@@ -30,8 +30,7 @@ def generate_design():
     
     user_id = session['user_id']
     folders = []
-    images_pulled = []
-    image = None  
+    images_pulled = []  # List to store images
 
     current_file_path = Path(__file__)
     parent_directory = current_file_path.parents[1]
@@ -42,17 +41,15 @@ def generate_design():
         folders.extend(users_created_folder)
 
     if request.method == "POST":
-        folder_name = request.form.getlist("folder_name")  
-        print("folder name: "+ str(folder_name))  
+        folder_names = request.form.getlist("folder_name")  # Form input returns a list of selected folder names
+        print("Selected folder names: "+ str(folder_names))  
 
-        for folder_names in folder_name:
-            folder_path = os.path.join(parent_directory, 'User_Uploads', user_id, folder_names)
+        for folder_name in folder_names:
+            folder_path = os.path.join(parent_directory, 'User_Uploads', user_id, folder_name)
             image = get_images(folder_path)
-            if image:  
-                images_pulled.append(image)
-            
-            
-
+            if image:
+                images_pulled.append(image)  # Add the base64-encoded image to the list
+        print("Images pulled: " + str(images_pulled))
 
     return render_template("image_generation.html", users_folder=users_folder, folders=folders, images_pulled=images_pulled)
 

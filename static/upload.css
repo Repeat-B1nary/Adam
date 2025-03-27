@@ -10,22 +10,80 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    /* Ensures full height */
     width: 100%;
 }
 
-/* Main Container */
-#body {
+/* Container for the forms */
+.container {
     background: #252525;
     padding: 5%;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
+    height: 400px;
     text-align: center;
 }
 
-/* Form */
+/* Toggle Buttons */
+.toggle-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    background: #a83232;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    flex: 1;
+}
+
+.toggle-buttons button:hover {
+    background: #c74242;
+}
+
+/* Flip Container */
+.flip-container {
+    perspective: 1000px;
+    width: 100%;
+    height: 100%;
+}
+
+/* The flipping box */
+.flip-item {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    transition: transform 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-container.flip-front #image_insertion {
+    transform: rotateY(0deg);
+}
+
+.flip-container.flip-back #folder_creation {
+    transform: rotateY(0deg);
+}
+
+.flip-container.flip-front #folder_creation {
+    transform: rotateY(180deg);
+}
+
+.flip-container.flip-back #image_insertion {
+    transform: rotateY(-180deg);
+}
+
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
@@ -33,14 +91,12 @@ form {
     width: 100%;
 }
 
-/* Labels */
 label {
     font-size: 1rem;
     font-weight: 500;
     color: #d0d0d0;
 }
 
-/* Inputs & Buttons */
 select,
 input[type="file"],
 button {
@@ -50,19 +106,71 @@ button {
     border: none;
     outline: none;
     width: 100%;
-    /* Makes sure they take full width */
-    max-width: 100%;
 }
-
 
 #folder_name {
     display: flex;
     justify-content: column;
+    padding: 7px;
+    border-style: hidden;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
+
+/* Style the file input */
 input[type="file"] {
-    background: #444;
+    background-color: #444;
     color: #aaa;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 2px solid #333;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Custom file input button */
+input[type="file"]::-webkit-file-upload-button {
+    background-color: #a83232;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #c74242;
+    transform: scale(1.05);
+    /* Slightly enlarge the button on hover */
+}
+
+/* On focus, improve visibility */
+input[type="file"]:focus {
+    border-color: #a83232;
+    outline: none;
+}
+
+/* For modern browsers that support ::file-selector-button */
+input[type="file"]::file-selector-button {
+    background-color: #a83232;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #c74242;
+    transform: scale(1.05);
+    /* Slightly enlarge the button on hover */
 }
 
 button {
@@ -89,10 +197,8 @@ footer {
 /* ================= */
 /* RESPONSIVE STYLES */
 /* ================= */
-
-/* Tablets & Small Laptops */
 @media (max-width: 1024px) {
-    #body {
+    .container {
         max-width: 90%;
     }
 
@@ -110,9 +216,8 @@ footer {
     }
 }
 
-/* Mobile Devices (iPhones, Android) */
 @media (max-width: 768px) {
-    #body {
+    .container {
         width: 95%;
         padding: 8%;
     }
@@ -131,13 +236,11 @@ footer {
     }
 }
 
-/* Small Screens (Older iPhones, Small Phones) */
 @media (max-width: 480px) {
-    #body {
+    .container {
         width: 100%;
         padding: 10%;
         border-radius: 0;
-        /* Removes border-radius for full-screen form */
     }
 
     form {
@@ -153,4 +256,3 @@ footer {
         padding: 6px;
     }
 }
-

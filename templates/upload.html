@@ -1,37 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}">
+    <script>
+        // JavaScript to toggle between forms with a page-flip animation
+        function toggleForm(formType) {
+            const container = document.querySelector('.flip-container');
+            const front = document.getElementById('image_insertion');
+            const back = document.getElementById('folder_creation');
+
+            if (formType === 'image_insertion') {
+                container.classList.remove('flip-back');
+                container.classList.add('flip-front');
+                front.style.display = 'block';
+                back.style.display = 'none';
+            } else {
+                container.classList.remove('flip-front');
+                container.classList.add('flip-back');
+                front.style.display = 'none';
+                back.style.display = 'block';
+            }
+        }
+
+        window.onload = function () {
+            // Default to showing the image insertion form
+            toggleForm('image_insertion');
+        };
+
+        function displayFileName() {
+                const fileInput = document.getElementById('image');
+                const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+                document.getElementById('file-name').textContent = fileName;
+            }
+
+    </script>
 </head>
+
 <body>
     {% include 'nav.html' %}
 
+    <div class="container">
+        <!-- Button to toggle between forms -->
+        <div class="toggle-buttons">
+            <button type="button" onclick="toggleForm('image_insertion')">Upload Image</button>
+            <button type="button" onclick="toggleForm('folder_creation')">Create Folder</button>
+        </div>
 
-    <div id="body">
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            
+        <!-- Flip Container for the forms -->
+        <div class="flip-container">
+            <!-- Image Upload Form (Front) -->
+            <div id="image_insertion" class="flip-item">
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <label for="folder_name">Select folder</label>
+                    <select id="folder_name" name="folder_name">
+                        {% for folder in folder %}
+                        <option value="{{ folder }}"> {{ folder }} </option>
+                        {% endfor %}
+                    </select>
+                
+                    <!-- File input container with custom button -->
+                    <div class="file-input-container">
+                        <label class="file-input-label" for="image">Pick your image</label>
+                        <input type="file" name="image" id="image" onchange="displayFileName()">
+                    </div>
+                
+                    <!-- Optional: Display the selected file name -->
+                    <p id="file-name"></p>
+                
+                    <button type="submit">Upload Image</button>
+                </form>
 
-            <div id="folder_name">
-                <label for="folder_name_input">Folder Name</label>
-                <input type="text" name="folder_name" id="folder_name_input">
             </div>
 
+            <!-- Folder Creation Form (Back) -->
+            <div id="folder_creation" class="flip-item">
+                <form action="/upload" method="POST">
+                    <label for="folder_name">Create a new folder</label>
+                    <input type="text" name="folder_name" id="folder_name">
 
-    
-            <label for="name">Pick your image</label>
-            <input type="file" name="image" id="image">
-        
-            <button type="submit">Submit</button>
-        </form>
-
+                    <button type="submit" name="create_folder" value="true">Create Folder</button>
+                </form>
+            </div>
+        </div>
     </div>
+
     <footer>
         <p>Made for Artists by Artists ✨</p>
     </footer>
-
-    
 </body>
+
 </html>

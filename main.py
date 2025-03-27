@@ -4,36 +4,37 @@ from Generate.image_generation import IGBP
 from Auth.signup import signup_bp
 from Auth.login import login_bp
 from Data.data import read_data
+from pathlib import Path
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'KingVon'
 
-# Register Blueprints
+
 app.register_blueprint(IGBP)
 app.register_blueprint(signup_bp)
 app.register_blueprint(login_bp)
 
-# Define directories
+
 UPLOAD_FOLDER = "User_Uploads"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Ensure upload directory exists
+
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 @app.route('/profile')
 def profile():
     if "user_id" not in session:
-        return redirect(url_for("login.login"))  # Redirect to login if not authenticated
+        return redirect(url_for("login.login")) 
 
-    user_id = session["user_id"]  # Get logged-in user's ID
+    user_id = session["user_id"]  
     user_info = read_data('user_info.json')
 
-    # Find the user's info
+    
     user = next((u for u in user_info if u['user_id'] == user_id), None)
 
     if not user:
-        return redirect(url_for("login.login"))  # If user not found, re-login
+        return redirect(url_for("login.login"))  
 
     username = user['username']
     password = user['password']
@@ -41,7 +42,7 @@ def profile():
     gender = user['gender']
     dob = user['dob']
     
-    # Locate the profile picture
+    
     user_folder = os.path.join("static", "profile_pics", user_id)
     profile_pic = None
 
@@ -56,35 +57,51 @@ def profile():
 
 @app.route("/")
 def home():
-
+                                    
     return render_template("home.html")
 
 
 @app.route("/upload", methods=["POST", "GET"])
 def index():
     if "user_id" not in session:
-        return redirect(url_for("login.login"))  # Redirect to login if not authenticated
+        return redirect(url_for("login.login")) 
+
+    user_id = session['user_id'] 
+    folder = []
+
+    current_file_path = Path(__file__)
+    parent_directory = current_file_path.parents[0]
+    users_folder = os.path.join(parent_directory, 'User_Uploads', user_id)
+    print("user folder: " + users_folder)
+
+    if os.path.exists(users_folder):
+        users_created_folder = os.listdir(users_folder)
+        folder.extend(users_created_folder)
+
+    print("folder: "+ str(folder))
 
 
-    if request.method == "POST":
-        folder_name = request.form.get("folder_name")
-        image = request.files.get("image")
+    if request.method == 'POST':
+        # Handling Image Upload
+        if 'image' in request.files:
+            image = request.files['image']
+            folder_name = request.form.get("folder_name")
 
-        print("type:  "+ folder_name)
-        user_id = session["user_id"]  # Get logged-in user's ID
-        user_folder = os.path.join(app.config['UPLOAD_FOLDER'], user_id, folder_name)  # Unique folder for user
-
-        if not os.path.exists(user_folder):
-            os.makedirs(user_folder)  # Create user-specific folder if it doesn't exist
-
-        if image:
-            # Save image in the user's specific folder
-            image_path = os.path.join(user_folder, image.filename)
+            image_path = os.path.join(users_folder, folder_name, image.filename)
             image.save(image_path)
 
-            return render_template("upload.html", image_path=image_path)
+            return redirect(url_for("IGBP.generate_design"))
 
-    return render_template("upload.html", image_path=None)
+        # Handling Folder Creation
+        elif 'create_folder' in request.form:
+            folder_name = request.form.get("folder_name")
+            user_folder_create = os.path.join(users_folder, folder_name)
+            os.makedirs(user_folder_create, exist_ok=True)
+
+            return redirect(url_for("IGBP.generate_design"))
+
+    return render_template("upload.html", folder=folder)
+
 
 
 @app.route('/logout')
